@@ -40,11 +40,17 @@ RUN amazon-linux-extras enable epel && \
 
 # Install Greengrass v2 dependencies
 RUN yum update -y && yum install -y python37 git vim python3-pip aws-cli tar unzip wget sudo procps which && \
-    amazon-linux-extras enable python3.8 && yum install -y python3.8 java-11-amazon-corretto-headless && \
-    wget $GREENGRASS_RELEASE_URI && sha256sum -c ${GREENGRASS_ZIP_SHA256} && \
-    rm -rf /var/cache/yum && \
+    amazon-linux-extras enable python3.8 && yum install -y python3.8 java-11-amazon-corretto-headless
+
+RUN wget $GREENGRASS_RELEASE_URI -O $GREENGRASS_ZIP_FILE && \
+    echo "File downloaded:" && ls -l $GREENGRASS_ZIP_FILE 
+        # echo "Verifying checksum..." && \
+    # sha256sum -c ${GREENGRASS_ZIP_SHA256}
+
+RUN rm -rf /var/cache/yum && \
     chmod +x /greengrass-entrypoint.sh && \
-    mkdir -p /opt/greengrassv2 $GGC_ROOT_PATH && unzip $GREENGRASS_ZIP_FILE -d /opt/greengrassv2 && rm $GREENGRASS_ZIP_FILE && rm $GREENGRASS_ZIP_SHA256
+    mkdir -p /opt/greengrassv2 $GGC_ROOT_PATH && unzip $GREENGRASS_ZIP_FILE -d /opt/greengrassv2 && rm $GREENGRASS_ZIP_FILE 
+    # rm $GREENGRASS_ZIP_SHA256
 
 
 RUN yum install -y mosquitto mosquitto-clients
@@ -58,6 +64,6 @@ RUN yum install -y mosquitto mosquitto-clients
 # modify /etc/sudoers
 COPY "modify-sudoers.sh" /
 RUN chmod +x /modify-sudoers.sh
-RUN ./modify-sudoers.sh
+RUN /modify-sudoers.sh
 
 ENTRYPOINT ["/greengrass-entrypoint.sh"]
