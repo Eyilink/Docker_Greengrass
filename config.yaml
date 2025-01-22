@@ -1,0 +1,16 @@
+---
+system:
+  certificateFilePath: "/greengrass/v2/certificate.pem"
+  privateKeyPath: "/greengrass/v2/private-key.pem"
+  rootCaPath: "/greengrass/v2/root-ca.pem"
+  rootpath: "/greengrass/v2"
+  thingName: "greengrass_core"
+services:
+  aws.greengrass.Nucleus:
+    componentType: "NUCLEUS"
+    version: "2.5.3"
+    configuration:
+      awsRegion: "us-west-2"
+      iotRoleAlias: "GreengrassCoreTokenExchangeRoleAlias"
+      iotDataEndpoint: "a14lg326y1ld73-ats.iot.eu-west-1.amazonaws.com"
+      iotCredEndpoint: "czv5ciy676p2e.credentials.iot.eu-west-1.amazonaws.com"

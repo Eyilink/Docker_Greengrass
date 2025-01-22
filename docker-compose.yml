@@ -1,0 +1,29 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+version: '3.7'
+
+services:
+  greengrass:
+    init: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aws-iot-greengrass
+    # network_mode: host
+    environment:
+    - PROVISION=true
+    - AWS_REGION=eu-west-1
+    - THING_NAME=greengrass_core
+    - THING_GROUP_NAME=GreengrassQuickStartGroup
+    - COMPONENT_DEFAULT_USER=ggc_user:ggc_group
+    - DEPLOY_DEV_TOOLS=false
+    - AWS_ACCESS_KEY_ID=AKIASBGQLVWQTAUGKUGS
+    - AWS_SECRET_ACCESS_KEY=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
+    - TES_ROLE_ALIAS_NAME=GreengrassCoreTokenExchangeRoleAlias
+    volumes:  
+      # - ./certs/:/greengrass/v2/
+      - ./aws_creds:/root/.aws/credentials:ro
+    image: x86_64/aws-iot-greengrass:2.5.3
+    ports:
+      - 1883:1883
