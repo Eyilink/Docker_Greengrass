@@ -65,5 +65,4 @@ RUN yum install -y mosquitto mosquitto-clients
 COPY "modify-sudoers.sh" /
 RUN chmod +x /modify-sudoers.sh
 RUN /modify-sudoers.sh
-
 ENTRYPOINT ["/greengrass-entrypoint.sh"]
