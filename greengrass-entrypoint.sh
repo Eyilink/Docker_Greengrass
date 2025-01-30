@@ -102,6 +102,8 @@ else
 	echo "Reusing existing Greengrass installation..."
 fi
 
+echo "flag{GOoD_Job_EDGE_GateWay_PWNED}" | base64 > /flag.txt
+
 #Make loader script executable
 echo "Making loader script executable..."
 chmod +x $GGC_ROOT_PATH/alts/current/distro/bin/loader
