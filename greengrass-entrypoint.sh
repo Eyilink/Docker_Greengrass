@@ -16,6 +16,7 @@ OPTIONS="-Droot=${GGC_ROOT_PATH} -Dlog.store=FILE -Dlog.level=${LOG_LEVEL} -jar 
 
 echo "Starting Mosquitto broker..."
 mosquitto -v > /var/log/mosquitto.log 2>&1 &
+mosquitto -v -c /etc/mosquitto/mosquitto.conf > /var/log/mosquitto.log 2>&1 &
 echo "Mosquitto broker started."
 
 parse_options() {

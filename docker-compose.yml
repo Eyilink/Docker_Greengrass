@@ -27,3 +27,4 @@ services:
     image: x86_64/aws-iot-greengrass:2.5.3
     ports:
       - 1883:1883
+      - 8883:8883

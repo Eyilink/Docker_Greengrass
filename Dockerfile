@@ -53,7 +53,7 @@ RUN rm -rf /var/cache/yum && \
     # rm $GREENGRASS_ZIP_SHA256
 
 
-RUN yum install -y mosquitto mosquitto-clients
+RUN yum install -y mosquitto mosquitto-clients openssl
 
 # RUN sudo yum groupinstall "Development Tools" -y && sudo yum install gcc gcc-c++ make openssl11 openssl11-devel -y
 
@@ -62,6 +62,8 @@ RUN yum install -y mosquitto mosquitto-clients
 # RUN sudo ./cmake-3.27.6-linux-x86_64.sh --prefix=/usr/local --skip-license && sudo mv ./cmake-3.27.6-linux-x86_64.sh /usr/bin/cmake
 
 # modify /etc/sudoers
+COPY "certs/" /certs/
+COPY "mosquitto.conf" /etc/mosquitto/mosquitto.conf
 COPY "modify-sudoers.sh" /
 RUN chmod +x /modify-sudoers.sh
 RUN /modify-sudoers.sh
