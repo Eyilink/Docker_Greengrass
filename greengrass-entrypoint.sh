@@ -103,7 +103,33 @@ else
 	echo "Reusing existing Greengrass installation..."
 fi
 
-echo "flag{GOoD_Job_EDGE_GateWay_PWNED}" | base64 > /flag.txt
+echo "flag{GOoD_Job_EDGE_GateWay_PWNED}" | base64 > /home/ggc_user/flag.txt
+echo "# Note de développeur - Activation bras robotisé via MQTT
+Date: 12/01/2025
+Auteur: Marc D.
+Équipe: Automatisation Industrielle
+
+## Procédure de test activation bras robotisé
+
+J'ai configuré le broker MQTT local pour le contrôle du bras. Pour les tests, chercher dans les processus un broker MQTT actif (généralement sur le port 1883).
+
+Pour activer le bras robotisé, il suffit d'envoyer la commande 'start' sur le topic 'test'. Le broker local se charge de transmettre la commande au contrôleur du bras.
+
+RAPPEL: Cette configuration est temporaire pour la phase de développement.
+
+Points importants:
+- Vérifier que la zone autour du bras est dégagée avant activation
+- Ne pas modifier la configuration du broker MQTT
+- En cas de comportement anormal, utiliser l'arrêt d'urgence physique
+
+TODO (urgent):
+- Implémenter l'authentification sur le broker
+- Chiffrer les communications MQTT
+- Définir des topics plus spécifiques
+- Mettre en place des ACLs
+- Retirer cette note après mise en prod
+
+@Paul: On en discute à la prochaine réunion d'équipe, il faut vraiment sécuriser tout ça avant la mise en production." > /home/ggc_user/notes_dev_indus.readme
 
 #Make loader script executable
 echo "Making loader script executable..."
